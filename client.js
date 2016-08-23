@@ -3,13 +3,15 @@ var path = require('path');
 var request = require('request');
 var http = require('http');
 
-
 var proxy = 'http://127.0.0.1:8000';
 
 var options = {
   uri: 'http://selenium-release.storage.googleapis.com/2.53/selenium-server-standalone-2.53.1.jar',
   method: 'GET',
-  proxy: proxy
+  proxy: proxy,
+  followRedirect: true,
+  timeout: 10000,
+  maxRedirects: 10
 };
 
 var filePath = path.resolve('selenium-server.jar');
@@ -20,7 +22,7 @@ request(options).on('response', (response) => {
   if (response.statusCode !== 200) {
     console.error('err');
   }
-}).pipe(file);
+}).pipe(fs.createWriteStream(filePath));
 
 // attempt with http
 // var req = http.request({
