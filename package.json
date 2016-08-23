@@ -10,9 +10,9 @@
   "author": "Craig Nishina <craig.nishina@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "http-proxy": "^1.14.0"
+    "http-proxy": "^1.14.0",
+    "request": "^2.74.0"
   },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cnishina/proxy-server.git"

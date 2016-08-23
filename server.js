@@ -14,15 +14,22 @@ var chromeProxy = httpProxy.createProxyServer({
   target: 'https://chromedriver.storage.googleapis.com'
 });
 
+var googleProxy = httpProxy.createProxyServer({
+  target: 'https://google.com'
+});
+
 var proxy = http.createServer(function(req, res) {
   var header = req.headers['host'];
   if (header.startsWith('selenium')) {
     console.log(header);
     seleniumProxy.web(req,res);
   }
-  if (header.startsWith('chromedriver')) {
+  else if (header.startsWith('chromedriver')) {
     console.log(header);
     chromeProxy.web(req,res);
+  }
+  else {
+    googleProxy.web(req,res);
   }
 });
 proxy.listen(8000);
