@@ -4,15 +4,14 @@
   "description": "a proxy server to test proxy features for webdriver-manager",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "jasmine": "jasmine",
+    "pretest": "tsc",
+    "test": "jasmine",
+    "prestart": "tsc",
+    "start": "node dist/server.js"
   },
   "author": "Craig Nishina <craig.nishina@gmail.com>",
   "license": "MIT",
-  "dependencies": {
-    "http-proxy": "^1.14.0",
-    "request": "^2.74.0"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cnishina/proxy-server.git"
@@ -20,5 +19,17 @@
   "bugs": {
     "url": "https://github.com/cnishina/proxy-server/issues"
   },
-  "homepage": "https://github.com/cnishina/proxy-server#readme"
+  "homepage": "https://github.com/cnishina/proxy-server#readme",
+  "dependencies": {
+    "http-proxy": "^1.14.0",
+    "request": "^2.81.0"
+  },
+  "devDependencies": {
+    "@types/http-proxy": "git+https://github.com/typed-contrib/node-http-proxy.git",
+    "@types/jasmine": "^2.5.47",
+    "@types/node": "^7.0.21",
+    "@types/request": "0.0.43",
+    "jasmine": "^2.6.0",
+    "typescript": "^2.3.2"
+  }
 }
