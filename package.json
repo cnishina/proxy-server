@@ -21,15 +21,15 @@
   },
   "homepage": "https://github.com/cnishina/proxy-server#readme",
   "dependencies": {
-    "http-proxy": "^1.14.0",
-    "request": "^2.81.0"
+    "http-proxy": "1.16.2",
+    "request": "2.81.0"
   },
   "devDependencies": {
     "@types/http-proxy": "git+https://github.com/typed-contrib/node-http-proxy.git",
-    "@types/jasmine": "^2.5.47",
-    "@types/node": "^7.0.21",
+    "@types/jasmine": "2.5.47",
+    "@types/node": "7.0.21",
     "@types/request": "0.0.43",
-    "jasmine": "^2.6.0",
-    "typescript": "^2.3.2"
+    "jasmine": "2.6.0",
+    "typescript": "2.3.2"
   }
 }
