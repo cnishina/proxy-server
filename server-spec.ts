@@ -11,7 +11,11 @@ import * as request from 'request';
  * @param specDone - jasmine done
  */
 let makeRequest = (requestOptions, specDone) => {
-  let req = request(requestOptions as request.CoreOptions & request.RequiredUriUrl).on('response', (response) => {
+  console.log(requestOptions);
+  let req = request(requestOptions as request.CoreOptions & request.RequiredUriUrl)
+      .on('response', (response) => {
+
+    console.log(response.statusCode);
     if (response.statusCode !== 200) {
       req.end();
       specDone.fail('did not get http status code of 200');
@@ -26,8 +30,8 @@ let makeRequest = (requestOptions, specDone) => {
  * Extends the request core options type to allow for proxy key
  */
 export interface Options extends request.CoreOptions {
-  proxy: any;
-  rejectUnauthorized: boolean;
+  proxy?: any;
+  rejectUnauthorized?: boolean;
   [key: string]: any;
 }
 
@@ -35,7 +39,7 @@ describe('test proxy server', () => {
   let proxy = 'http://127.0.0.1:8080';
   let options: Options = {
     method: 'GET',
-    followRedirect: true,
+    followRedirect: false,
     timeout: 10000,
     maxRedirects: 50,
     proxy: proxy,
@@ -65,7 +69,8 @@ describe('test proxy server', () => {
   
   describe('for geckodriver', () => {
     beforeEach(() => {
-      options['url'] = 'http://github.com/mozilla/geckodriver/releases/download/v0.16.1/geckodriver-v0.16.1-macos.tar.gz'
+      options['url'] = 'http://github.com/mozilla/geckodriver/releases/download/v0.16.1/geckodriver-v0.16.1-macos.tar.gz';
+      options['headers'] = { 'host': 'github.com' };
     });
 
     it('should download the binary', done => {
@@ -75,29 +80,3 @@ describe('test proxy server', () => {
 });
 
 
-
-
-
-
-// attempt with http
-// var req = http.request({
-//   host: 'localhost',
-//   port: '8000',
-//   path: '/2.53/selenium-server-standalone-2.53.1.jar',
-//   method: 'GET',
-//   headers: {
-//     host: 'selenium-release.storage.googleapis.com'
-//   }
-//   // agent: agent
-//   // ,
-//   // followRedirect: true
-// }, (resp) => {
-//   console.log(resp);
-//   resp.setEncoding('utf8');
-//   resp.on('data', (chunk) => {
-//     console.log('response: ' + chunk);
-//   });
-// });
-//
-// req.end();
-// 
