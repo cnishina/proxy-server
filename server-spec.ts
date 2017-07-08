@@ -11,12 +11,13 @@ import * as request from 'request';
  * @param specDone - jasmine done
  */
 let makeRequest = (requestOptions, specDone) => {
-  console.log(requestOptions);
-  let req = request(requestOptions as request.CoreOptions & request.RequiredUriUrl)
-      .on('response', (response) => {
+  let req = request(requestOptions as request.CoreOptions & request.RequiredUriUrl).on('response', (response) => {
 
-    console.log(response.statusCode);
-    if (response.statusCode !== 200) {
+    if (response.statusCode === 302) {
+      console.log('302');
+      console.log(response.headers['location']);
+      specDone();
+    } else if (response.statusCode !== 200) {
       req.end();
       specDone.fail('did not get http status code of 200');
     } else {
