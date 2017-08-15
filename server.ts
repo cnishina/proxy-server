@@ -27,6 +27,12 @@ const proxy = http.createServer((request, response) => {
     githubApiProxy.web(request, response);
   } else if (header.startsWith('github.com')) {
     githubProxy.web(request, response);
+  } else if (header.match('amazonaws.com')) {
+    let amazonProxy = httpProxy.createProxyServer({
+      ssl: false,
+      secure: false,
+      target: header
+    });
   }
 });
 proxy.listen(8080);
